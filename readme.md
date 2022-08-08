@@ -50,3 +50,23 @@ Rather than just sending back strings, we can also send back files, JSON data, b
 e.g. `__dirname + 'path/to-file.html'`
 
 4. If you send a get request to the server at localhost:3000/html you should get back the HTML file as a response.
+
+## Step 5: Templating for Server Side Rendering
+
+We can dynamically modify HTML files before sending them to the client using a templating engine or view engine. Here we will install and use EJS to try this out.
+
+1. Run `npm install ejs` to install ejs.
+
+2. We need to tell Express that we are using ejs by adding `app.set('view engine', 'ejs')` to the server.
+
+3. ejs will look for a views folder. Create a views folder in the project.
+
+4. Move the HTML file we created previously into this new views folder.
+
+5. Change the extension on the HTML file from `.html` to `.ejs` so that ejs knows it is a template file.
+
+6. In the `.ejs` file (formerly an `.html` file) add some templating syntax as shown in the example. `<%= "This is dynamically generated!" + " " + "Math: " + (4 + 4) %>`. This is just JS that is between the EJS tags, similar to using the double curly brackets in Vue to template on the front end.
+
+7. Now we can change our /html endpoint to use `.render()` instead of `.sendFile()`. We can also just write the name of the file without needing to specify a path as ejs will simply look in the views folder automatically.
+
+8. Now when the server is started and a get request is sent to /html, the server will use ejs to dynamically process and assemble the .ejs template file into a static HTML file and send that to the client. This is called serverside rendering.
