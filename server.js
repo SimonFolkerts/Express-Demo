@@ -1,10 +1,16 @@
-// to access the express framework we need to import it from node_modules using require. This makes it available in the current file. It takes the form of a function, which we store in the 'express' variable.
 const express = require("express");
 
-// now that it is imported, we can use the express function to instantiate a new express application object, which we store in the app variable.
 const app = express();
 
-// now that we have the express instance set up, we can instruct it to begin listening to http traffic on port 3000
-app.listen(3000);
+// add ability to react to get requests to localhost:3000/
+app.get("/", (req, res) => {
+  // this callback function gets access to the request and response objects. The request object contains information about the request from the clinet, and the response object can be used to create and send a response to the client using a variety of different methods.
 
-// to activate the server, we can tell node to execute this js file by running this CLI command: node server.js
+  // first we console log a simple message to the servers console in Node
+  console.log("get request to root");
+
+  // then we use the .send() method to send to the client a string that says hello. Responding to the client ends the interaction.
+  res.send("Hello!");
+});
+
+app.listen(3000);

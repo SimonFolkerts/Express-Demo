@@ -14,3 +14,17 @@
 
 6. You should see `Cannot GET /` as the response when you visit the server's address at `localhost:3000`. This means it is working and we can start setting up endpoints.
 
+## Step 2: Create an Endpont
+
+Once the server is running, requests can be sent to it which it must be programmed to react to in a certain way. We can use a variety of methods to react to a variety of request types, such as `.get()`, `.post()`, `.put()`, `.delete()` etc.
+
+These methods require two parameters to work properly, the path or route that they should monitor, and a function that will handle the request and response objects for the interaction.
+
+1. Create an endpoint to handle get requests to the root of the application using `app.get('/')`
+
+2. Supply it with a second argument, a function that will be given the request and response objects: `app.get('/', (req, res) => {})`
+
+3. In the callback function, we now have access to the request and the response objects. We specify what should happen when a get request arrives at the root of the application. In the example the server will console log a message and then trigger the response object to send back a string to the client, ending the interaction using `res.send()`
+
+4. Now try visiting the address `localhost:3000` in the browser, you should see 'Hello!' rendered in the viewport. In the Network tab you can see the http transactions request and response data to confirm this has worked.
+
