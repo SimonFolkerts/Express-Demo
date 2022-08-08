@@ -7,13 +7,19 @@ app.get("/", (req, res) => {
   res.send("Hello!");
 });
 
-// new endpoint that monitors for GET to /posts. Usually such a request would return a list of posts
+// endpoint that monitors /html for GET requests
+app.get("/html", (req, res) => {
+  console.log("GET request to /html");
+  // use sendFile() to send a file. __dirname is prepended to the file name as the absolute path to the file is needed here and __dirname gets the path to the project folder, so we simply add what is needed to get us to the exact file in the project folder. In this case the file is right inside the project folder so we just write /filename
+  res.sendFile(__dirname + "/page.html");
+});
+
+// posts
 app.get("/posts", (req, res) => {
   console.log("GET request to /posts");
   res.send("List of all Posts");
 });
 
-// new endpoint that monitors for POST to /posts. Usually such a request would be to upload a new post to the server
 app.post("/posts", (req, res) => {
   console.log("POST request to /posts");
   res.send("Uploaded a New Post");

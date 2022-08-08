@@ -38,3 +38,15 @@ We can add additional endpoints with different methods and at different URL addr
 
 Note, to send a GET request to an address we can just point the browser to an address, as it uses GET requests to fetch and display content. However, to send a POST request to an address you would need to use an HTML form or fetch() or a REST Client.
 
+## STEP 4: Sending Back Stuff
+
+Rather than just sending back strings, we can also send back files, JSON data, basically whatever we want. Lets try sending back an HTML or text file.
+
+1. Create a new file called page.html or something similar, and put in some boilerplate HTML
+
+2. Create a new endpoint that monitors for get requests to /html as shown in the example. Instead of usind `.send()` to send back a string, we will use `.sendFile()`
+
+3. `.sendFile()` requires a single argument, the absolute path to the file to send. This is based on the root of the system that the server is running on, so we will need to get the FULL path to the file from the disk. Fortunately we can use `--dirname` to get the path to the current folder the server is in, and then just concatenate the file relative to that folder onto the end, as shown in the example.
+e.g. `__dirname + 'path/to-file.html'`
+
+4. If you send a get request to the server at localhost:3000/html you should get back the HTML file as a response.
