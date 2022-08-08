@@ -28,3 +28,13 @@ These methods require two parameters to work properly, the path or route that th
 
 4. Now try visiting the address `localhost:3000` in the browser, you should see 'Hello!' rendered in the viewport. In the Network tab you can see the http transactions request and response data to confirm this has worked.
 
+## Step 3: Add More Endpoints
+
+We can add additional endpoints with different methods and at different URL addresses.
+
+1. Create a new endpoint that reacts to get requests to /posts as shown in the example. Get requests are usually used to retreive data from a server to be displayed on the client.
+
+2. Create a new endpoint that reacts to post requests as shown in the example. Post requests are usually used to send data to the server to be saved from the client. This time we use the `.post()` method instead of `.get()`
+
+Note, to send a GET request to an address we can just point the browser to an address, as it uses GET requests to fetch and display content. However, to send a POST request to an address you would need to use an HTML form or fetch() or a REST Client.
+
