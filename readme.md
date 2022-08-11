@@ -70,3 +70,23 @@ We can dynamically modify HTML files before sending them to the client using a t
 7. Now we can change our /html endpoint to use `.render()` instead of `.sendFile()`. We can also just write the name of the file without needing to specify a path as ejs will simply look in the views folder automatically.
 
 8. Now when the server is started and a get request is sent to /html, the server will use ejs to dynamically process and assemble the .ejs template file into a static HTML file and send that to the client. This is called serverside rendering.
+
+## Step 6: Adding a Full Set of Endpoints/Routes
+Let's add a full set of CRUD endpoints for a blogging system. We will need the ability to add, remove, update and read blog-post, as well as authors. For now there will be no accounts or authentication so all CRUD functions will be available to anyone. For now we will just send back messages that reflect what that endpoint will do, and later we will add functionality.
+
+1. Create a set of enpoints for the following use cases:
+    - get list of all blog posts: `get("/blog-posts")`
+    - get list of favourite blog posts: `get("/blog-posts/favourites")`
+
+2. How can we create an endpoint for a specific post from the list? We need some way of specifying which post we want. We could theoretically make an endpoint for every post in the list but this is unfeasible. Instead we need a single endpoint that can somehow see which one we want based on some criteria such as title or id of the post. We can use dynamic URL segments for this.
+    - get specific post: `get("/blog-posts/:id")`
+    - update specific post: `put("/blog-posts/:id")`
+    - delete specific post: `delete("/blog-posts/:id")`
+
+The colon : indicates that that part of the URL is not part of the address on the server, but a piece of data that should be accessible in the code. If we put a colon in front of a segment, that segment is then accessible in the req.params property. Anything in the req URL that occupies the same position as the : is then stored as a value in req.params.
+
+So in the above example, if a GET request came to the server with a URL of `localhost:3000/blog-posts`, it would match with the get all posts endpoint. However if there was a second segment in the URL like this: `localhost:3000/blog-posts/qwerty` then that second segment (`qwerty`) would be stored as a value in req.params.id, since it is the part of the URL that corresponds with the :id segment. So any URL that has a second segment after /blog-posts would match with this endpoint and have a dynamic bit of data in it.
+
+One important note, for POST requests to be able to access the data being sent in the body, we must first enable access to the body using `express.urlencoded({extended: true})` and `epxress.json()`. Urlencoded() allows express to parse strings and arrays and objects etc, and json() allows express to parse JSON data.
+
+Refer to the code for an example of this.
